@@ -8,10 +8,12 @@ def requests_top():
     response = requests.get(url)  # response = requests.get(URL, その他任意の引数)
     article = response.json()
     for i in article:
-        try:
+        time.sleep(1)  # sleepのタイミングを変更
+        try:  # 例外処理(try-except構文)
             response2 = requests.get(f'https://hacker-news.firebaseio.com/v0/item/{i}.json?print=pretty').json()
-            print('{ title:' + response2['title'], ', Link:' + response2['url'], '}')
-            time.sleep(1)
+            if 'url' in response2:
+                print('{ title:' + response2['title'], ', Link:' + response2['url'], '}')
+
         except KeyError:  # 辞書型データを参照した際に、辞書内に指定したキーが存在しないと、KeyErrorが発生
             pass  # try-except構文を用いて対処。passは何もしない文
 
