@@ -12,8 +12,8 @@ def requests_top():
             response2 = requests.get(f'https://hacker-news.firebaseio.com/v0/item/{i}.json?print=pretty').json()
             print('{ title:' + response2['title'], ', Link:' + response2['url'], '}')
             time.sleep(1)
-        except KeyError:
-            pass
+        except KeyError:  # 辞書型データを参照した際に、辞書内に指定したキーが存在しないと、KeyErrorが発生
+            pass  # try-except構文を用いて対処。passは何もしない文
 
 
 def main():
